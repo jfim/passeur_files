@@ -1,7 +1,7 @@
 defmodule PasseurFiles.Tools.DeleteFile do
   @moduledoc "Delete a file"
 
-  use Hermes.Server.Component, type: :tool
+  use Anubis.Server.Component, type: :tool
 
   schema do
     field :path, {:required, :string}, description: "Relative path to the file to delete"
@@ -14,21 +14,21 @@ defmodule PasseurFiles.Tools.DeleteFile do
         case File.rm(full_path) do
           :ok ->
             {:reply,
-             Hermes.Server.Response.tool()
-             |> Hermes.Server.Response.text("Deleted #{path}"),
+             Anubis.Server.Response.tool()
+             |> Anubis.Server.Response.text("Deleted #{path}"),
              frame}
 
           {:error, reason} ->
             {:reply,
-             Hermes.Server.Response.tool()
-             |> Hermes.Server.Response.text("Error deleting file: #{reason}"),
+             Anubis.Server.Response.tool()
+             |> Anubis.Server.Response.text("Error deleting file: #{reason}"),
              frame}
         end
 
       {:error, msg} ->
         {:reply,
-         Hermes.Server.Response.tool()
-         |> Hermes.Server.Response.text("Error: #{msg}"),
+         Anubis.Server.Response.tool()
+         |> Anubis.Server.Response.text("Error: #{msg}"),
          frame}
     end
   end

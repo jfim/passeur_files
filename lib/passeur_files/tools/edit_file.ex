@@ -1,7 +1,7 @@
 defmodule PasseurFiles.Tools.EditFile do
   @moduledoc "Edit a file by replacing a string with another"
 
-  use Hermes.Server.Component, type: :tool
+  use Anubis.Server.Component, type: :tool
 
   schema do
     field :path, {:required, :string}, description: "Relative path to the file"
@@ -21,34 +21,34 @@ defmodule PasseurFiles.Tools.EditFile do
               case File.write(full_path, new_content) do
                 :ok ->
                   {:reply,
-                   Hermes.Server.Response.tool()
-                   |> Hermes.Server.Response.text("Edited #{path}"),
+                   Anubis.Server.Response.tool()
+                   |> Anubis.Server.Response.text("Edited #{path}"),
                    frame}
 
                 {:error, reason} ->
                   {:reply,
-                   Hermes.Server.Response.tool()
-                   |> Hermes.Server.Response.text("Error writing file: #{reason}"),
+                   Anubis.Server.Response.tool()
+                   |> Anubis.Server.Response.text("Error writing file: #{reason}"),
                    frame}
               end
             else
               {:reply,
-               Hermes.Server.Response.tool()
-               |> Hermes.Server.Response.text("Error: old_string not found in file"),
+               Anubis.Server.Response.tool()
+               |> Anubis.Server.Response.text("Error: old_string not found in file"),
                frame}
             end
 
           {:error, reason} ->
             {:reply,
-             Hermes.Server.Response.tool()
-             |> Hermes.Server.Response.text("Error reading file: #{reason}"),
+             Anubis.Server.Response.tool()
+             |> Anubis.Server.Response.text("Error reading file: #{reason}"),
              frame}
         end
 
       {:error, msg} ->
         {:reply,
-         Hermes.Server.Response.tool()
-         |> Hermes.Server.Response.text("Error: #{msg}"),
+         Anubis.Server.Response.tool()
+         |> Anubis.Server.Response.text("Error: #{msg}"),
          frame}
     end
   end

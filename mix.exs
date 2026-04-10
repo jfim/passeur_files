@@ -33,7 +33,7 @@ defmodule PasseurFiles.MixProject do
 
   defp deps do
     [
-      {:hermes_mcp, "~> 0.14.1"},
+      {:anubis_mcp, "~> 1.0"},
       {:jason, "~> 1.4"},
       {:ex_doc, "~> 0.35", only: :dev, runtime: false}
     ]

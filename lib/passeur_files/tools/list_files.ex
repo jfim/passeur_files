@@ -1,7 +1,7 @@
 defmodule PasseurFiles.Tools.ListFiles do
   @moduledoc "List files and directories at a given path"
 
-  use Hermes.Server.Component, type: :tool
+  use Anubis.Server.Component, type: :tool
 
   schema do
     field :path, :string, description: "Relative path within the vault (default: root)"
@@ -28,8 +28,8 @@ defmodule PasseurFiles.Tools.ListFiles do
         case entries do
           {:error, reason} ->
             {:reply,
-             Hermes.Server.Response.tool()
-             |> Hermes.Server.Response.text("Error: #{reason}"),
+             Anubis.Server.Response.tool()
+             |> Anubis.Server.Response.text("Error: #{reason}"),
              frame}
 
           files ->
@@ -46,15 +46,15 @@ defmodule PasseurFiles.Tools.ListFiles do
               |> Enum.join("\n")
 
             {:reply,
-             Hermes.Server.Response.tool()
-             |> Hermes.Server.Response.text(listing),
+             Anubis.Server.Response.tool()
+             |> Anubis.Server.Response.text(listing),
              frame}
         end
 
       {:error, msg} ->
         {:reply,
-         Hermes.Server.Response.tool()
-         |> Hermes.Server.Response.text("Error: #{msg}"),
+         Anubis.Server.Response.tool()
+         |> Anubis.Server.Response.text("Error: #{msg}"),
          frame}
     end
   end

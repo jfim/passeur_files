@@ -1,7 +1,7 @@
 defmodule PasseurFiles.Tools.WriteFile do
   @moduledoc "Create or overwrite a file with the given content"
 
-  use Hermes.Server.Component, type: :tool
+  use Anubis.Server.Component, type: :tool
 
   schema do
     field :path, {:required, :string}, description: "Relative path to the file"
@@ -17,21 +17,21 @@ defmodule PasseurFiles.Tools.WriteFile do
         case File.write(full_path, content) do
           :ok ->
             {:reply,
-             Hermes.Server.Response.tool()
-             |> Hermes.Server.Response.text("Written to #{path}"),
+             Anubis.Server.Response.tool()
+             |> Anubis.Server.Response.text("Written to #{path}"),
              frame}
 
           {:error, reason} ->
             {:reply,
-             Hermes.Server.Response.tool()
-             |> Hermes.Server.Response.text("Error writing file: #{reason}"),
+             Anubis.Server.Response.tool()
+             |> Anubis.Server.Response.text("Error writing file: #{reason}"),
              frame}
         end
 
       {:error, msg} ->
         {:reply,
-         Hermes.Server.Response.tool()
-         |> Hermes.Server.Response.text("Error: #{msg}"),
+         Anubis.Server.Response.tool()
+         |> Anubis.Server.Response.text("Error: #{msg}"),
          frame}
     end
   end

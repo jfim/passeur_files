@@ -1,7 +1,7 @@
 defmodule PasseurFiles.Tools.ReadFile do
   @moduledoc "Read the contents of a file"
 
-  use Hermes.Server.Component, type: :tool
+  use Anubis.Server.Component, type: :tool
 
   schema do
     field :path, {:required, :string}, description: "Relative path to the file"
@@ -14,21 +14,21 @@ defmodule PasseurFiles.Tools.ReadFile do
         case File.read(full_path) do
           {:ok, content} ->
             {:reply,
-             Hermes.Server.Response.tool()
-             |> Hermes.Server.Response.text(content),
+             Anubis.Server.Response.tool()
+             |> Anubis.Server.Response.text(content),
              frame}
 
           {:error, reason} ->
             {:reply,
-             Hermes.Server.Response.tool()
-             |> Hermes.Server.Response.text("Error reading file: #{reason}"),
+             Anubis.Server.Response.tool()
+             |> Anubis.Server.Response.text("Error reading file: #{reason}"),
              frame}
         end
 
       {:error, msg} ->
         {:reply,
-         Hermes.Server.Response.tool()
-         |> Hermes.Server.Response.text("Error: #{msg}"),
+         Anubis.Server.Response.tool()
+         |> Anubis.Server.Response.text("Error: #{msg}"),
          frame}
     end
   end
