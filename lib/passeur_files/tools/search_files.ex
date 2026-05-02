@@ -38,7 +38,7 @@ defmodule PasseurFiles.Tools.SearchFiles do
 
   defp run_rg(rg, query, search_root, fixed_string?) do
     flags =
-      ["--no-heading", "-n", "--column", "--color=never", "--"]
+      ["-i", "--no-heading", "-n", "--column", "--color=never", "--"]
       |> then(fn f -> if fixed_string?, do: ["-F" | f], else: f end)
 
     args = flags ++ [query, search_root]
