@@ -33,7 +33,7 @@ defmodule PasseurFiles.MixProject do
 
   defp deps do
     [
-      {:anubis_mcp, "~> 1.0"},
+      {:anubis_mcp, git: "https://github.com/jfim/anubis-mcp.git", branch: "non-upstreamed-fixes", override: true},
       {:jason, "~> 1.4"},
       {:ex_doc, "~> 0.35", only: :dev, runtime: false}
     ]
